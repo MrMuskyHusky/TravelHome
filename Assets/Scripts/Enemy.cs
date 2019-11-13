@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
         points = waypointParent.GetComponentsInChildren<Transform>();
         if (points != null)
         {
+
             Gizmos.color = Color.red;
             for (int i = 1; i < points.Length - 1; i++)
             {
@@ -49,30 +50,29 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Do not continue on if there are no more waypoints.
         if (points.Length == 0)
         {
             return;
         }
         if(currentWaypoint >= points.Length)
         {
+            // Return back to the first way point if enemy is at the end of the waypoint
             currentWaypoint = 1;
         }
         print("Current Waypoint: " + currentWaypoint);
         // Get the current waypoint
         Transform currentPoint = points[currentWaypoint];
         // Move towards current waypoint
-        // transform.position = Vector3.MoveTowards(transform.position, currentPoint.position, Speed * Time.deltaTime);
+        
         agent.SetDestination(currentPoint.position);
         // Check if distance between waypoint is close
         float distance = Vector3.Distance(transform.position, currentPoint.position);
         if (distance < waypointDistance)
         {
-            // Switch to next waypoint
+            // If the distance between the waypoint is close, go to the next waypoint
             currentWaypoint++;
         }
-        // >>ERROR HANDLING<<
-        // If currentWaypoint is outside array length
-        // Reset back to 1
     }
 
     public bool IsAgentOnNavMesh(GameObject agentObject)
