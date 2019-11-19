@@ -4,23 +4,28 @@ public class GameManager : MonoBehaviour
 {
     public void NextScene()
     {
+        // Goes straight to the next scene when a level is completed or a trigger is called.
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.buildIndex + 1);
     }
     public void ResetLevel()
     {
+        // Resets the current level of the scene when you hit a trigger or a ui button is pressed.
         Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.buildIndex);
     }
     public void MainMenu(int sceneIndex)
     {
+        // Loads the scene that has been selected
         SceneManager.LoadScene(0);
     }
     public void OnApplicationQuit()
     {
+        // Quits the unity application
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif
+#else
         Application.Quit();
+#endif
     }
 }

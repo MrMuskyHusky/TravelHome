@@ -12,14 +12,6 @@ public class Enemy : MonoBehaviour
     private int currentWaypoint = 1;
     private float onMeshThreshold = 3;
 
-    /*
-     * int = 1, 2, 3
-     * float = 0.125, .5f, 1.1f
-     * bool = true, false
-     * string = "Hello", "World"
-     * char = 'C', 'O', 'O', 'L'
-     */
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +24,7 @@ public class Enemy : MonoBehaviour
         points = waypointParent.GetComponentsInChildren<Transform>();
         if (points != null)
         {
-
+            // Draw a red line at the transform position point.
             Gizmos.color = Color.red;
             for (int i = 1; i < points.Length - 1; i++)
             {
@@ -41,6 +33,7 @@ public class Enemy : MonoBehaviour
                 Gizmos.DrawLine(pointA.position, pointB.position);
             }
 
+            // Draw a Sphere of the current object around it.
             for (int i = 1; i < points.Length; i++)
             {
                 Gizmos.DrawSphere(points[i].position, waypointDistance);
